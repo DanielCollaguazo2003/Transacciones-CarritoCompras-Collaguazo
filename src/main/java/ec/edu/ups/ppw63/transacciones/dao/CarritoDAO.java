@@ -6,6 +6,7 @@ import ec.edu.ups.ppw63.transacciones.model.Carrito;
 import ec.edu.ups.ppw63.transacciones.model.Carrito;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 
@@ -52,13 +53,15 @@ public class CarritoDAO {
 		return null;
 		}
 	
-	public Carrito getCarritoPorCliente(int codigo) {
-		String jpql = "SELECT c FROM Carrito c WHERE c.codigo_cliente = :codigo";
-		Query q = em.createQuery(jpql, Carrito.class);
-		q.setParameter("codigo", codigo);
-		List<Carrito> carritos = q.getResultList();
-		if (carritos.size() > 0)
-			return carritos.get(0);
-		return null;
+	public Carrito getCarritoPorCliente(int codigoCliente) {
+	    String jpql = "SELECT c FROM Carrito c WHERE c.cliente.codigo = :codigo";
+	    Query q = em.createQuery(jpql, Carrito.class);
+	    q.setParameter("codigo", codigoCliente);
+	    try {
+	        return (Carrito) q.getSingleResult();
+	    } catch (NoResultException e) {
+	        return null;
+	    }
 	}
+
 }

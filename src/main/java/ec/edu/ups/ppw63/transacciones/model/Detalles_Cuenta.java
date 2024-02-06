@@ -16,6 +16,8 @@ public class Detalles_Cuenta {
 	private Date fecha;
 	private float monto;
 	private float saldo;
+	
+	
 	public int getCodigo() {
 		return codigo;
 	}

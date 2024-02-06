@@ -32,12 +32,15 @@ public class GestionFacturas {
 	}
 	
 	public void guardarFacturas(Carrito carrito) {
+		System.out.println("Entroal metodo general");
 		Factura fac = new Factura();
 		fac.setCliente(carrito.getCliente());
 		fac.setFechaEmision(new Date());
 		fac.setNumero("010101010100101");
 		fac.setTotal(1000);
-		for(int i = 0; i > carrito.getDetalles().size(); i++) {
+		System.out.println(carrito);
+		for(int i = 0; i < carrito.getDetalles().size(); i++) {
+			System.out.println("Entro a meter detalles");
 			DetalleFactura det  = new DetalleFactura();
 			det.setCantidad(carrito.getDetalles().get(i).getCantidad());
 			det.setNombre("dsasadas");
